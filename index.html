@@ -150,7 +150,6 @@
       letter-spacing: 1px;
     }
 
-    /* Main Grid Structure */
     .dashboard-layout {
       display: grid;
       grid-template-columns: 2.7fr 1.3fr;
@@ -161,7 +160,6 @@
       .dashboard-layout { grid-template-columns: 1fr; }
     }
 
-    /* Panels & Section Styles */
     .panel {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -201,7 +199,6 @@
       box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
     }
 
-    /* Timeline Styling */
     .timeline { position: relative; padding-left: 25px; }
     .timeline::before {
       content: '';
@@ -277,7 +274,6 @@
       font-size: 0.8rem;
     }
 
-    /* Right Side - Custom Photo / Canvas Stage */
     .astro-stage {
       display: flex;
       flex-direction: column;
@@ -323,6 +319,7 @@
       object-fit: cover;
       object-position: center top;
       display: block;
+      z-index: 2;
       filter: contrast(1.08) brightness(1.02);
     }
 
@@ -385,7 +382,6 @@
 </head>
 <body>
 
-  <!-- Dynamic Starfield Canvas Background -->
   <canvas id="space-bg"></canvas>
 
   <div class="container">
@@ -401,7 +397,6 @@
       </div>
     </header>
 
-    <!-- KPI Summary Grid -->
     <div class="kpi-grid">
       <div class="kpi-card">
         <i class="fa-solid fa-user-astronaut"></i>
@@ -425,10 +420,8 @@
       </div>
     </div>
 
-    <!-- Main Dashboard Grid -->
     <div class="dashboard-layout">
       <div>
-        <!-- Tech Stack Radar Panel -->
         <div class="panel">
           <div class="panel-header">
             <span><i class="fa-solid fa-diagram-project"></i> TECH STACK RADAR MAP</span>
@@ -448,7 +441,6 @@
           </div>
         </div>
 
-        <!-- Impact Metrics Chart Panel -->
         <div class="panel">
           <div class="panel-header">
             <span><i class="fa-solid fa-chart-column"></i> MÉTRICAS DE IMPACTO & RESULTADOS</span>
@@ -458,7 +450,6 @@
           </div>
         </div>
 
-        <!-- Interactive Experience Timeline Panel -->
         <div class="panel">
           <div class="panel-header">
             <span><i class="fa-solid fa-timeline"></i> TIMELINE DE EXPERIENCIA</span>
@@ -474,7 +465,6 @@
       </div>
 
       <div class="astro-stage">
-        <!-- Interactive Card with File Picker + Canvas Rendering Fallback -->
         <div class="portrait-card-wrapper" onclick="triggerPhotoUpload()" title="Haz clic para cambiar la foto">
           <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
           
@@ -483,10 +473,8 @@
           </div>
 
           <div class="portrait-container">
-            <!-- Dynamic Vector Canvas Portrait (Fallback) -->
             <canvas id="portrait-canvas" width="400" height="500"></canvas>
-            <!-- User Linked Photo from GitHub -->
-            <img id="user-photo" src="https://raw.githubusercontent.com/Samir17s/Pagina_Web/main/foto.JPG" alt="Samir Garzón Sánchez" onerror="this.style.display='none'; document.getElementById('portrait-canvas').style.display='block';" />
+            <img id="user-photo" src="https://raw.githubusercontent.com/Samir17s/Pagina_Web/main/foto.JPG" alt="Samir Garzón Sánchez" onload="this.style.display='block'; document.getElementById('portrait-canvas').style.display='none';" onerror="this.style.display='none'; document.getElementById('portrait-canvas').style.display='block';" />
             
             <div class="hud-photo-footer">
               <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.8); margin-bottom: 2px;">
@@ -499,7 +487,6 @@
           </div>
         </div>
 
-        <!-- Custom Sci-Fi Badges Grid -->
         <div class="badge-grid-hud">
           <div class="hud-patch" style="border-color:#e11d48;"><i class="fa-solid fa-building-columns" style="color:#e11d48;"></i> Santander</div>
           <div class="hud-patch" style="border-color:#15803d;"><i class="fa-solid fa-graduation-cap" style="color:#15803d;"></i> U. Surcolombiana</div>
@@ -507,7 +494,6 @@
           <div class="hud-patch" style="border-color:#22c55e;"><i class="fa-solid fa-bolt" style="color:#22c55e;"></i> -60% Tiempo</div>
         </div>
 
-        <!-- Academic Information Card -->
         <div class="panel" style="width: 100%; margin-top: 20px;">
           <div class="panel-header"><span><i class="fa-solid fa-graduation-cap"></i> FORMACIÓN ACADÉMICA</span></div>
           <p style="font-size: 1.1rem; color: #fff; font-weight: 700;">Economista</p>
@@ -518,7 +504,6 @@
   </div>
 
   <script>
-    // Starfield Animated Background
     const bgCanvas = document.getElementById('space-bg');
     const bgCtx = bgCanvas.getContext('2d');
     let stars = [];
@@ -554,14 +539,12 @@
     }
     drawStars();
 
-    // Direct High-Resolution Canvas Portrait Engine (Monochrome Cyber-Executive)
     function drawCanvasPortrait() {
       const pCanvas = document.getElementById('portrait-canvas');
       const pCtx = pCanvas.getContext('2d');
       const w = pCanvas.width;
       const h = pCanvas.height;
 
-      // Dark Sci-Fi Background Gradient
       const grad = pCtx.createLinearGradient(0, 0, 0, h);
       grad.addColorStop(0, '#0a0f1d');
       grad.addColorStop(0.6, '#030712');
@@ -569,7 +552,6 @@
       pCtx.fillStyle = grad;
       pCtx.fillRect(0, 0, w, h);
 
-      // Grid Pattern Overlay
       pCtx.strokeStyle = 'rgba(0, 240, 255, 0.05)';
       pCtx.lineWidth = 1;
       for (let x = 0; x < w; x += 20) {
@@ -579,8 +561,7 @@
         pCtx.beginPath(); pCtx.moveTo(0, y); pCtx.lineTo(w, y); pCtx.stroke();
       }
 
-      // Executive Torso & White Shirt Vector Render
-      pCtx.fillStyle = '#f8fafc'; // White shirt
+      pCtx.fillStyle = '#f8fafc';
       pCtx.beginPath();
       pCtx.moveTo(w * 0.25, h * 0.95);
       pCtx.lineTo(w * 0.35, h * 0.58);
@@ -590,7 +571,6 @@
       pCtx.closePath();
       pCtx.fill();
 
-      // Shirt Shadows & Collar
       pCtx.fillStyle = '#cbd5e1';
       pCtx.beginPath();
       pCtx.moveTo(w * 0.42, h * 0.58);
@@ -600,7 +580,6 @@
       pCtx.closePath();
       pCtx.fill();
 
-      // Dark Executive Vest / Suit Jacket Sides
       pCtx.fillStyle = '#0f172a';
       pCtx.beginPath();
       pCtx.moveTo(0, h);
@@ -616,32 +595,27 @@
       pCtx.lineTo(w, h * 0.95);
       pCtx.fill();
 
-      // Neck & Head Base
-      pCtx.fillStyle = '#94a3b8'; // Skin tone (Monochrome)
+      pCtx.fillStyle = '#94a3b8';
       pCtx.beginPath();
       pCtx.ellipse(w * 0.5, h * 0.55, 25, 35, 0, 0, Math.PI * 2);
       pCtx.fill();
 
-      // Head Shape
       pCtx.fillStyle = '#cbd5e1';
       pCtx.beginPath();
       pCtx.ellipse(w * 0.5, h * 0.36, 65, 80, 0, 0, Math.PI * 2);
       pCtx.fill();
 
-      // Hair (Short Styled Cut)
       pCtx.fillStyle = '#1e293b';
       pCtx.beginPath();
       pCtx.ellipse(w * 0.5, h * 0.28, 68, 45, 0, Math.PI, Math.PI * 2);
       pCtx.fill();
 
-      // Facial Features & Eyes
       pCtx.fillStyle = '#334155';
       pCtx.beginPath();
-      pCtx.arc(w * 0.42, h * 0.35, 6, 0, Math.PI * 2); // Left eye
-      pCtx.arc(w * 0.58, h * 0.35, 6, 0, Math.PI * 2); // Right eye
+      pCtx.arc(w * 0.42, h * 0.35, 6, 0, Math.PI * 2);
+      pCtx.arc(w * 0.58, h * 0.35, 6, 0, Math.PI * 2);
       pCtx.fill();
 
-      // Eyebrows
       pCtx.strokeStyle = '#1e293b';
       pCtx.lineWidth = 4;
       pCtx.beginPath();
@@ -649,7 +623,6 @@
       pCtx.moveTo(w * 0.54, h * 0.33); pCtx.lineTo(w * 0.64, h * 0.32);
       pCtx.stroke();
 
-      // Glasses / HUD Reticle Effect
       pCtx.strokeStyle = 'rgba(0, 240, 255, 0.8)';
       pCtx.lineWidth = 2;
       pCtx.strokeRect(w * 0.35, h * 0.31, 32, 20);
@@ -658,7 +631,6 @@
       pCtx.moveTo(w * 0.43, h * 0.33); pCtx.lineTo(w * 0.53, h * 0.33);
       pCtx.stroke();
 
-      // Cyber Hologram Scanners & Crosshairs
       pCtx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
       pCtx.beginPath();
       pCtx.arc(w * 0.5, h * 0.42, 110, 0, Math.PI * 2);
@@ -672,7 +644,6 @@
 
     drawCanvasPortrait();
 
-    // Local Photo Uploader Handler
     function triggerPhotoUpload() {
       document.getElementById('file-input').click();
     }
@@ -691,7 +662,6 @@
       }
     }
 
-    // Tech Skill Profiles
     const techProfiles = {
       global: {
         label: 'Consolidado General',
@@ -739,7 +709,6 @@
       }
     };
 
-    // Timeline Roles Data
     const expData = [
       {
         id: 'santander_gastos',
@@ -822,7 +791,6 @@
     window.onload = function() {
       renderTimeline();
 
-      // Initialize Radar Chart
       const ctxRadar = document.getElementById('techRadarChart').getContext('2d');
       radarChart = new Chart(ctxRadar, {
         type: 'radar',
@@ -854,7 +822,6 @@
         }
       });
 
-      // Initialize Impact Bar Chart
       const ctxBar = document.getElementById('impactBarChart').getContext('2d');
       impactBarChart = new Chart(ctxBar, {
         type: 'bar',
